@@ -30,12 +30,9 @@ while game_on:
         new_turtle.write(state_answer)
         if state_answer not in correct_guesses:
             correct_guesses.append(state_answer)
-    elif state_answer == "Exit":
+    if state_answer == "Exit":
         game_on = False
-        states_not_known = ["States"]
-        for state in state_list:
-            if state not in correct_guesses:
-                states_not_known.append(state)
+        states_not_known = [state for state in state_list if state not in correct_guesses]
         df = pandas.DataFrame(states_not_known)
         df.to_csv("states_to_learn.csv")
 
